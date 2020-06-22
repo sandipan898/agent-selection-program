@@ -9,8 +9,9 @@ selection_mode_list = ['all available', 'least busy', 'random']
 
 
 def select_agent(agent_list, selection_mode):
+
     """ check the conditions based on selection mode and returns the agent id of selected agents """
-    
+    selected_agents = None
     selection_mode = selection_mode.lower()
     available_time_list = [i['available_since'] for i in agent_list]
 
@@ -22,7 +23,7 @@ def select_agent(agent_list, selection_mode):
         selected_agents = [i['agent_id'] for i in agent_list if i['available_since'] == max_time]
 
     if selection_mode == 'random':
-        selected_agents =  random.choice(agent_list)['agent_id']
+        selected_agents =  [random.choice(agent_list)['agent_id']]
 
     return selected_agents
 
@@ -30,4 +31,7 @@ def select_agent(agent_list, selection_mode):
 #selected_agents = select_agent(agent_list, 'All available')
 selected_agents = select_agent(agent_list, 'random')
 
-print(selected_agents)
+print("*********Selected agents with their data*********\n")
+for agent in selected_agents:
+    
+    
